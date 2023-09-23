@@ -2,9 +2,9 @@ import turtle
 import random
 import paddle
 
-BALL_DIRECTIONS = random.choice([0, 180])
-BALL_POSITION = random.randint(-200, 200)
 BALL_MOVE_DISTANCE = 20
+RIGHT_BOUNDARY = 280
+LEFT_BOUNDARY = -280
 
 
 class Ball(turtle.Turtle):
@@ -15,8 +15,12 @@ class Ball(turtle.Turtle):
         self.color('white')
         self.shapesize(1)
         self.penup()
-        self.sety(BALL_POSITION)
 
-    def move(self):
-        self.setheading(BALL_DIRECTIONS)
+    def move(self, direction, position):
+        self.setheading(direction)
+        self.sety(position)
         self.forward(BALL_MOVE_DISTANCE)
+        if self.xcor() > RIGHT_BOUNDARY:
+            self.setx(0)
+        elif self.xcor() < LEFT_BOUNDARY:
+            self.setx(0)

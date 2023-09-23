@@ -2,6 +2,7 @@ import turtle
 import time
 import paddle
 import ball
+import random
 import scoreboard
 
 STARTING_POSITION = [(-270, 10), (260, 10)]
@@ -25,6 +26,7 @@ paddle_1 = paddle.Paddle(STARTING_POSITION[0])
 paddle_2 = paddle.Paddle(STARTING_POSITION[1])
 game_score_p1 = scoreboard.Score("1")
 game_score_p2 = scoreboard.Score("2")
+
 game_ball = ball.Ball()
 
 def bounce():
@@ -41,21 +43,29 @@ is_game_on = True
 
 player1_score = 0
 player2_score = 0
+ball_position = 0
+ball_direction = 0
 
 while is_game_on:
     screen.update()
     game_score_p1.score_update(player1_score)
     game_score_p2.score_update(player2_score)
-    bounce()
-    game_ball.move()
+    game_ball.move(position=ball_position, direction=ball_direction)
     if game_ball.xcor() > 275:
         player1_score += 1
+        ball_position = random.randint(-200, 200)
+        game_ball.setx(0)
+        ball_direction = 180
+        time.sleep(0.5)
     elif game_ball.xcor() < -275:
         player2_score += 1
+        ball_position = random.randint(-200, 200)
+        game_ball.setx(0)
+        ball_direction = 0
+        time.sleep(0.5)
     if player1_score > 10 or player2_score > 10:
         game_score_p1.game_over()
         break
-
 
 
 
