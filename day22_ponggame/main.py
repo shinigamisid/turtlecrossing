@@ -1,25 +1,53 @@
 import turtle
 import time
 import paddle
+import ball
+import scoreboard
+
+STARTING_POSITION = [(-270, 10), (260, 10)]
+DIVIDER_SIZE = ((5, 20), (5, -20), (-5, -20), (-5, 20))
 
 screen = turtle.Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
 screen.title("shini's Pong Game")
 screen.tracer(0)
-game_paddle = paddle.Paddle()
+screen.register_shape('divider_rectangle', DIVIDER_SIZE)
+
+for i in range(350, -350, -70):
+    divider_line_1 = turtle.Turtle()
+    divider_line_1.setheading(90)
+    divider_line_1.goto(0, i)
+    divider_line_1.shape('divider_rectangle')
+    divider_line_1.color('white')
+
+paddle_1 = paddle.Paddle(STARTING_POSITION[0])
+paddle_2 = paddle.Paddle(STARTING_POSITION[1])
+game_score_p1 = scoreboard.Score("1")
+game_score_p2 = scoreboard.Score("2")
+game_ball = ball.Ball()
+
+def bounce():
+    if game_ball.distance(paddle_1) < 25 or game_ball.distance(paddle_2) < 25:
+        game_ball.setheading(-game_ball.heading())
 
 screen.listen()
-screen.onkey(game_paddle.player2_up, 'Up')
-screen.onkey(game_paddle.player2_down, 'Down')
-screen.onkey(game_paddle.player1_up, 'w')
-screen.onkey(game_paddle.player1_down, 's')
+screen.onkey(paddle_1.paddle_up, 'w')
+screen.onkey(paddle_1.paddle_down, 's')
+screen.onkey(paddle_2.paddle_up, 'Up')
+screen.onkey(paddle_2.paddle_down, 'Down')
 
 is_game_on = True
 
+player1_score = 0
+player2_score = 0
+
 while is_game_on:
     screen.update()
-    screen.tracer(1)
+    game_score_p1.score_update(player1_score)
+    game_score_p2.score_update(player2_score)
+    game_ball.move()
+    bounce()
 
 
 
