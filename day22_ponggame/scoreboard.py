@@ -8,9 +8,9 @@ class Score(Turtle):
 
     def __init__(self, player):
         super().__init__()
+        self.penup()
         self.color("white")
         self.hideturtle()
-        self.penup()
         if player == '1':
             self.goto(-100, 230)
         elif player == '2':

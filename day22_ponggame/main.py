@@ -15,11 +15,11 @@ screen.tracer(0)
 screen.register_shape('divider_rectangle', DIVIDER_SIZE)
 
 for i in range(350, -350, -70):
-    divider_line_1 = turtle.Turtle()
-    divider_line_1.setheading(90)
-    divider_line_1.goto(0, i)
-    divider_line_1.shape('divider_rectangle')
-    divider_line_1.color('white')
+    divider_line = turtle.Turtle()
+    divider_line.setheading(90)
+    divider_line.goto(0, i)
+    divider_line.shape('divider_rectangle')
+    divider_line.color('white')
 
 paddle_1 = paddle.Paddle(STARTING_POSITION[0])
 paddle_2 = paddle.Paddle(STARTING_POSITION[1])
@@ -46,8 +46,15 @@ while is_game_on:
     screen.update()
     game_score_p1.score_update(player1_score)
     game_score_p2.score_update(player2_score)
-    game_ball.move()
     bounce()
+    game_ball.move()
+    if game_ball.xcor() > 275:
+        player1_score += 1
+    elif game_ball.xcor() < -275:
+        player2_score += 1
+    if player1_score > 10 or player2_score > 10:
+        game_score_p1.game_over()
+        break
 
 
 
