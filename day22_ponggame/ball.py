@@ -1,10 +1,9 @@
 import turtle
-import random
-import paddle
 
 BALL_MOVE_DISTANCE = 20
 RIGHT_BOUNDARY = 280
 LEFT_BOUNDARY = -280
+
 
 class Ball(turtle.Turtle):
 
@@ -35,8 +34,6 @@ class Ball(turtle.Turtle):
         self.ball_speed *= 0.9
 
     def reset_position(self):
-        self.goto(0,0)
+        self.goto(0, 0)
         self.ball_speed = 0.01
         self.bounce_x()
-
-
