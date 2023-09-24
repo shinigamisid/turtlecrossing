@@ -1,7 +1,7 @@
 from turtle import Turtle
 
 ALIGNMENT = "center"
-FONT = ("Courier", 48, "bold")
+FONT = ("Courier", 80, "bold")
 FONT_GAME_OVER = ("Paciencia", 48, "bold")
 
 class Score(Turtle):
@@ -12,9 +12,9 @@ class Score(Turtle):
         self.color("white")
         self.hideturtle()
         if player == '1':
-            self.goto(-100, 230)
+            self.goto(-100, 200)
         elif player == '2':
-            self.goto(100, 230)
+            self.goto(100, 200)
 
     def game_over(self):
         self.goto(0, 0)

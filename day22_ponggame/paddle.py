@@ -1,16 +1,16 @@
 import turtle
 
-BORDER = [240, -235]
+BORDER = [250, -250]
 MOVE_DISTANCE = 25
-PADDLE_SIZE = ((10, 35), (10, -35), (-10, -35), (-10, 35))
+
 
 
 class Paddle(turtle.Turtle):
 
     def __init__(self, paddle_position):
         super().__init__()
-        self.screen.register_shape('rectangle', PADDLE_SIZE)
-        self.shape('rectangle')
+        self.shape('square')
+        self.shapesize(stretch_wid=1, stretch_len=5)
         self.color('white')
         self.penup()
         self.goto(paddle_position)
